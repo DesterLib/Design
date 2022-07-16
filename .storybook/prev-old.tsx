@@ -1,5 +1,25 @@
+import styled, { css, ThemeProvider } from 'styled-components';
+import { DecoratorFn } from '@storybook/react';
+import { GlobalStyles } from '../src/theme/GlobalStyles';
+import React from 'react';
+// import { withThemesProvider } from 'themeprovider-storybook';
+
 export const parameters = {
+  // backgrounds: {
+  //   default: 'dark',
+  //   values: [
+  //     {
+  //       name: 'dark',
+  //       value: '#00151C',
+  //     },
+  //     {
+  //       name: 'light',
+  //       value: '#ffffff',
+  //     },
+  //   ],
+  // },
   actions: { argTypesRegex: '^on.*' },
+  viewMode: 'docs',
   options: {
     storySort: {
       method: 'alphabetical',
@@ -14,8 +34,19 @@ export const parameters = {
   },
 };
 
-import { withThemesProvider } from 'themeprovider-storybook';
-
+const ThemeBlock = styled.div<{ fill: boolean }>(
+  ({ theme }) =>
+    css`
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      bottom: 0;
+      overflow: auto;
+      padding: 1rem;
+      background: ${theme.backgroundColor};
+    `
+);
 // Options:
 const themes = [
   {
@@ -58,6 +89,11 @@ const themes = [
         dark: '#30C42B',
         contrastText: '#ffffff',
       },
+      text: {
+        primary: 'rgba(0, 0, 0, 0.87)',
+        secondary: 'rgba(0, 0, 0, 0.6)',
+        disabled: 'rgba(0, 0, 0, 0.38)',
+      },
       background: {
         paper: '#e9e9e9',
         default: '#ffffff',
@@ -72,7 +108,7 @@ const themes = [
   },
   {
     name: 'dark',
-    backgroundColor: '#000',
+    backgroundColor: '#00151C',
     palette: {
       primary: {
         main: '#00FFB3',
@@ -110,6 +146,11 @@ const themes = [
         dark: '#30C42B',
         contrastText: '#000000',
       },
+      text: {
+        primary: '#ffffff',
+        secondary: 'rgba(255, 255, 255, 0.7)',
+        disabled: 'rgba(255, 255, 255, 0.5)',
+      },
       background: {
         paper: '#07272b',
         default: '#00151C',
@@ -124,4 +165,34 @@ const themes = [
   },
 ];
 
-export const decorators = [withThemesProvider(themes)];
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'circlehollow',
+      items: ['light', 'dark'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+};
+
+export const withTheme: DecoratorFn = (StoryFn, context) => {
+  // Get values from story parameter first, else fallback to globals
+  const theme = context.parameters.theme || context.globals.theme;
+  const storyTheme = theme === 'dark' ? themes[1] : themes[0];
+  return (
+    <ThemeProvider theme={storyTheme}>
+      <GlobalStyles />
+      <ThemeBlock fill>
+        <StoryFn />
+      </ThemeBlock>
+    </ThemeProvider>
+  );
+};
+
+// export const decorators = [withThemesProvider(themes)];
+
+export const decorators = [withTheme];
