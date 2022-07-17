@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import Logo from '../src/assets/logo/logo.svg'
+import Logo from '../src/assets/logo/logo.svg';
 
 const DarkTheme = create({
   base: 'dark',
@@ -17,8 +17,8 @@ const DarkTheme = create({
   fontCode: 'monospace',
 
   // Text colors
-  textColor: '#ffffff',
-  textInverseColor: 'rgba(255,255,255,0.9)',
+  // textColor: '#ffffff',
+  // textInverseColor: 'rgba(255,255,255,0.9)',
 
   // Toolbar default and active colors
   barTextColor: '#ffffff',
@@ -37,4 +37,4 @@ const DarkTheme = create({
   brandTarget: '_self',
 });
 
-export default DarkTheme
+export default DarkTheme;

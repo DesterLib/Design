@@ -1,23 +1,25 @@
-import React from 'react'
-import styled, { css, ThemeProvider } from 'styled-components'
-import { DecoratorFn } from '@storybook/react'
+import React from 'react';
+import styled, { css, ThemeProvider } from 'styled-components';
+import { DecoratorFn } from '@storybook/react';
 
-import { GlobalStyle } from '../src/styles/GlobalStyle'
-import { darkTheme, lightTheme } from '../src/styles/theme'
-import { breakpoints } from '../src/styles/breakpoints'
+import { GlobalStyle } from '../src/styles/GlobalStyle';
+import { darkTheme, lightTheme } from '../src/styles/theme';
 
-const ThemeBlock = styled.div<{ left?: boolean; fill?: boolean }>(
-  ({ left, fill, theme: { palette } }) =>
+const ThemeBlock = styled.div<{ fill?: boolean }>(
+  ({ fill, theme: { palette } }) =>
     css`
-      padding: 1rem;
+      border-radius: 5px;
       background: ${palette.background.default};
+      padding: 1rem;
+      height: 100%;
+      width: ${fill ? '100%' : '50%'};
+      float: ${fill ? 'none' : 'left'};
     `
-)
+);
 
 export const withTheme: DecoratorFn = (StoryFn, context) => {
-  // Get values from story parameter first, else fallback to globals
-  const theme = context.parameters.theme || context.globals.theme
-  const storyTheme = theme === 'light' ? lightTheme : darkTheme
+  const theme = context.parameters.theme || context.globals.theme;
+  const storyTheme = theme === 'light' ? lightTheme : darkTheme;
 
   switch (theme) {
     case 'side-by-side': {
@@ -25,7 +27,7 @@ export const withTheme: DecoratorFn = (StoryFn, context) => {
         <>
           <ThemeProvider theme={lightTheme}>
             <GlobalStyle />
-            <ThemeBlock left>
+            <ThemeBlock>
               <StoryFn />
             </ThemeBlock>
           </ThemeProvider>
@@ -36,7 +38,7 @@ export const withTheme: DecoratorFn = (StoryFn, context) => {
             </ThemeBlock>
           </ThemeProvider>
         </>
-      )
+      );
     }
     default: {
       return (
@@ -46,10 +48,10 @@ export const withTheme: DecoratorFn = (StoryFn, context) => {
             <StoryFn />
           </ThemeBlock>
         </ThemeProvider>
-      )
+      );
     }
   }
-}
+};
 
 export const globalTypes = {
   theme: {
@@ -69,6 +71,6 @@ export const globalTypes = {
       showName: true,
     },
   },
-}
+};
 
-export const decorators = [withTheme]
+export const decorators = [withTheme];

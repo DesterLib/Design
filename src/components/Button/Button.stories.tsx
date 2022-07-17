@@ -1,45 +1,40 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react';
 
-import { Button } from './Button'
+import Button from '.';
 
 export default {
   title: 'Components/Data Dispaly/Button',
   component: Button,
-} as ComponentMeta<typeof Button>
+} as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
   children: 'Button',
-}
+};
 
-export const Disabled = Template.bind({})
+export const Secondary = Template.bind({});
+Secondary.args = {
+  children: 'Button',
+  variant: 'secondary'
+};
+
+export const Disabled = Template.bind({});
 Disabled.args = {
   children: 'Button',
   disabled: true,
-}
+};
 
-export const Clear = Template.bind({})
-Clear.args = {
-  clear: true,
-  children: 'Button',
-}
+export const StartIcon = Template.bind({});
+StartIcon.args = {
+  startIcon: 'home',
+  children: 'HOME',
+};
 
-export const Icon = Template.bind({})
-Icon.args = {
-  icon: 'cart',
-  'aria-label': 'cart',
-}
-
-export const IconAndText = Template.bind({})
-IconAndText.args = {
-  icon: 'cart',
-  children: (
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#949494' }}>Order</span>
-      <span style={{ color: 'white', paddingLeft: '8px' }}>€ 8</span>
-    </div>
-  ),
-}
+export const EndIcon = Template.bind({});
+EndIcon.args = {
+  endIcon: 'home',
+  children: 'HOME',
+};
