@@ -1,57 +1,20 @@
 import React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { DecoratorFn } from '@storybook/react';
 
 import { GlobalStyle } from '../src/styles/GlobalStyle';
 import { darkTheme, lightTheme } from '../src/styles/theme';
 
-const ThemeBlock = styled.div<{ fill?: boolean }>(
-  ({ fill, theme: { palette } }) =>
+const ThemeBlock = styled.div<{ fullWidth?: boolean }>(
+  ({ fullWidth, theme: { palette } }) =>
     css`
       border-radius: 5px;
       background: ${palette.background.default};
       padding: 1rem;
       height: 100%;
-      width: ${fill ? '100%' : '50%'};
-      float: ${fill ? 'none' : 'left'};
+      width: ${fullWidth ? '100%' : '50%'};
+      float: ${fullWidth ? 'none' : 'left'};
     `
 );
-
-export const withTheme: DecoratorFn = (StoryFn, context) => {
-  const theme = context.parameters.theme || context.globals.theme;
-  const storyTheme = theme === 'light' ? lightTheme : darkTheme;
-
-  switch (theme) {
-    case 'side-by-side': {
-      return (
-        <>
-          <ThemeProvider theme={lightTheme}>
-            <GlobalStyle />
-            <ThemeBlock>
-              <StoryFn />
-            </ThemeBlock>
-          </ThemeProvider>
-          <ThemeProvider theme={darkTheme}>
-            <GlobalStyle />
-            <ThemeBlock>
-              <StoryFn />
-            </ThemeBlock>
-          </ThemeProvider>
-        </>
-      );
-    }
-    default: {
-      return (
-        <ThemeProvider theme={storyTheme}>
-          <GlobalStyle />
-          <ThemeBlock fill>
-            <StoryFn />
-          </ThemeBlock>
-        </ThemeProvider>
-      );
-    }
-  }
-};
 
 export const globalTypes = {
   theme: {
@@ -73,4 +36,40 @@ export const globalTypes = {
   },
 };
 
-export const decorators = [withTheme];
+export const decorators = [
+  (StoryFn: any, context: any) => {
+    const theme = context.parameters.theme || context.globals.theme;
+    const storyTheme = theme === 'light' ? lightTheme : darkTheme;
+  
+    switch (theme) {
+      case 'side-by-side': {
+        return (
+          <>
+            <ThemeProvider theme={lightTheme}>
+              <GlobalStyle />
+              <ThemeBlock>
+                <StoryFn />
+              </ThemeBlock>
+            </ThemeProvider>
+            <ThemeProvider theme={darkTheme}>
+              <GlobalStyle />
+              <ThemeBlock>
+                <StoryFn />
+              </ThemeBlock>
+            </ThemeProvider>
+          </>
+        );
+      }
+      default: {
+        return (
+          <ThemeProvider theme={storyTheme}>
+            <GlobalStyle />
+            <ThemeBlock fullWidth>
+              <StoryFn />
+            </ThemeBlock>
+          </ThemeProvider>
+        );
+      }
+    }
+  },
+];
