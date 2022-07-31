@@ -29,19 +29,19 @@ const EndIconWrapper = styled.span({
 
 const StyledButton = styled(motion.button)<{
     variant: 'primary' | 'secondary' | 'info' | 'warning' | 'success' | 'error',
-    size?: 'small' | 'medium' | 'large'
-}>(({ variant, theme: { palette, shape } }) => ({
+    size: 'small' | 'medium' | 'large'
+}>(({ size, variant, theme: { palette, shape, sizing } }) => ({
     position: 'relative',
     zIndex: '105',
     fontWeight: '500',
     fontSize: '15px',
-    height: '40px',
     border: '0px',
     display: 'flex',
     justifyContent: 'center',
+    lineHeight: '1.75',
     alignItems: 'center',
     cursor: 'pointer',
-    padding: '10px 15px',
+    padding: sizing.padding[size],
     color: palette[variant].text,
     backgroundImage: `linear-gradient(45deg, ${palette[variant].dark} 0%, ${palette[variant].main} 100%)`,
     borderRadius: shape.borderRadius.s,
@@ -65,7 +65,7 @@ type DefaultProps = {
     /**
      * Does the button have a variant ?
      */
-    variant?: 'primary' | 'secondary' | 'info' | 'warning' | 'success' | 'error' | undefined;
+    variant?: 'primary' | 'secondary' | 'info' | 'warning' | 'success' | 'error';
     /**
      * Is the button round ?
      */

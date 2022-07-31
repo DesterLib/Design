@@ -17,25 +17,25 @@ const darkThemeDefaults = {
       main: '#FF3564',
       light: '#FF677C',
       dark: '#DB2662',
-      text: '#000000',
+      text: '#ffffff',
     },
     warning: {
       main: '#FF9E16',
       light: '#FFBD50',
       dark: '#DB7E10',
-      text: '#000000',
+      text: '#ffffff',
     },
     info: {
       main: '#286CFF',
       light: '#5D95FF',
       dark: '#1D53DB',
-      text: '#000000',
+      text: '#ffffff',
     },
     success: {
       main: '#84EF6A',
       light: '#4FE53B',
       dark: '#30C42B',
-      text: '#000000',
+      text: '#ffffff',
     },
     background: {
       paper: '#07272b',
@@ -56,6 +56,23 @@ const darkThemeDefaults = {
       xl: '32px',
       xxl: '40px',
       round: '50%',
+    },
+  },
+  sizing: {
+    padding: {
+      small: '4px 10px',
+      medium: '6px 16px',
+      large: '8px 22px'
+    },
+    margin: {
+      sm: '',
+      md: '',
+      lg: ''
+    },
+    fontSize: {
+      sm: '',
+      md: '',
+      lg: ''
     },
   },
   shadows: {

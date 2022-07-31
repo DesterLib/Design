@@ -4,6 +4,15 @@ import { motion } from 'framer-motion';
 import MaterialIcon from '../Icon';
 import alpha from '../../Functions/alpha';
 
+const IconWrapper = styled.div({
+    transition: '0.2s ease-out',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0',
+    padding: '0'
+});
+
 const TransitionGradiant = styled.span<{
     round?: boolean;
     variant: 'primary' | 'secondary' | 'info' | 'warning' | 'success' | 'error';
@@ -21,11 +30,12 @@ const TransitionGradiant = styled.span<{
 }));
 
 const StyledIconButton = styled(motion.button)<{
-    size: string;
+    size: 'small' | 'medium' | 'large';
     round: boolean;
     wide: boolean;
+    shadow: boolean;
     variant: 'primary' | 'secondary' | 'info' | 'warning' | 'success' | 'error';
-}>(({ variant, wide, round, theme: { palette, shape } }) => ({
+}>(({ shadow, variant, wide, round, theme: { palette, shape } }) => ({
     position: 'relative',
     zIndex: '105',
     fontWeight: '500',
@@ -33,9 +43,10 @@ const StyledIconButton = styled(motion.button)<{
     border: '0px',
     cursor: 'pointer',
     aspectRatio: wide ? 'auto' : '1/1',
-    padding: wide ? '10px 15px' : '10px',
-    width: wide ? 'fit-content' : '50px',
-    height: '50px',
+    width: 'fit-content',
+    boxShadow: shadow
+        ? 'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px'
+        : 'none',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -78,13 +89,15 @@ type DefaultProps = {
      */
     icon?: React.ReactNode | string;
     /**
-     * Size of the icon
+     * Is the button large ?
      */
-    iconSize?: number;
+    size?: 'small' | 'medium' | 'large';
     /**
      * Is the button disabled?
      */
     disabled?: boolean;
+
+    shadow?: boolean;
     /**
      * Optional click handler
      */
@@ -100,24 +113,29 @@ export const IconButton: React.FC<IconButtonProps> = ({
     icon,
     materialIcon = true,
     round = false,
-    size,
-    variant='primary',
+    size = 'small',
+    variant = 'primary',
     wide,
+    shadow,
     ...props
 }) => {
     return (
         <StyledIconButton
-            whileHover={{ scale: 1.3 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             type='button'
             wide={wide}
             variant={variant}
+            shadow={shadow}
+            size={size}
             round={round}
             {...props}
         >
             <TransitionGradiant round={round} variant={variant} className='transition-gradiant' />
-            {materialIcon && <MaterialIcon name={icon} />}
-            {!materialIcon && icon}
+            <IconWrapper>
+                {materialIcon && <MaterialIcon name={icon} />}
+                {!materialIcon && icon}
+            </IconWrapper>
         </StyledIconButton>
     );
 };

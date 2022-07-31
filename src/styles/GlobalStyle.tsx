@@ -1,5 +1,4 @@
 import { createGlobalStyle, css } from 'styled-components';
-
 import { breakpoints } from './breakpoints';
 import { resetCSS } from './CSSReset';
 
@@ -7,7 +6,6 @@ export const GlobalStyle = createGlobalStyle(
     () => css`
         ${resetCSS}
         * {
-            transition: all 250ms ease-in;
             transition-property: background, color, border;
         }
         /* cyrillic-ext */

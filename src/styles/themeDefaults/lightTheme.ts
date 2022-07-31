@@ -89,6 +89,23 @@ const lightThemeDefaults = {
       regular: '400',
     },
   },
+  sizing: {
+    padding: {
+      small: '4px 10px',
+      medium: '6px 16px',
+      large: '8px 22px'
+    },
+    margin: {
+      sm: '',
+      md: '',
+      lg: ''
+    },
+    fontSize: {
+      sm: '',
+      md: '',
+      lg: ''
+    },
+  },
 };
 
 export default lightThemeDefaults;

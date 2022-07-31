@@ -16,12 +16,6 @@ Default.args = {
   children: 'Button',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  children: 'Button',
-  variant: 'secondary'
-};
-
 export const Disabled = Template.bind({});
 Disabled.args = {
   children: 'Button',
