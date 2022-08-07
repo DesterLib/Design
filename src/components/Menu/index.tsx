@@ -1,0 +1,91 @@
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import MuiMenu, { MenuProps } from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import IconWrapper from "../IconWrapper";
+import { Divider, Typography } from "@mui/material";
+// import Divider from "@mui/material/Divider";
+
+export interface StyledMenuProps extends MenuProps {
+  options: any;
+}
+
+const StyledMenu = styled((props: MenuProps) => (
+  <MuiMenu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "left",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "left",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 180,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+    },
+  },
+}));
+
+const Menu: React.FC<StyledMenuProps> = ({
+  anchorEl,
+  open,
+  onClose,
+  options,
+}) => {
+  return (
+    <StyledMenu
+      id="demo-customized-menu"
+      MenuListProps={{
+        "aria-labelledby": "demo-customized-button",
+      }}
+      anchorEl={anchorEl}
+      open={open}
+      onClose={onClose}
+    >
+      {options &&
+        options.map((item: any) => (
+          <>
+          <MenuItem onClick={item.onClick}>
+            {item.icon && (
+              <ListItemIcon>
+                <IconWrapper name={item.icon} />
+              </ListItemIcon>
+            )}
+            <ListItemText>{item.name}</ListItemText>
+            <Typography variant="body2" color="text.secondary">
+              {item.secondaryName}
+            </Typography>
+          </MenuItem>
+          {item.divider && (
+            <Divider/>
+          )}
+          </>
+        ))}
+    </StyledMenu>
+  );
+};
+
+export default Menu;

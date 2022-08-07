@@ -29,37 +29,22 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "semi": true,
-    "tabWidth": 4,
-    "printWidth": 100,
-    "importOrder": [
-      "^components/(.*)$",
-      "^[./]"
-    ],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "jsxSingleQuote": true,
-    "bracketSpacing": true
-  },
-  "name": "theme",
+  "name": "design",
   "author": "AlkenD",
-  "module": "dist/theme.esm.js",
+  "module": "dist/design.esm.js",
   "size-limit": [
     {
-      "path": "dist/theme.cjs.production.min.js",
+      "path": "dist/design.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/theme.esm.js",
+      "path": "dist/design.esm.js",
       "limit": "10 KB"
     }
   ],
   "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@size-limit/preset-small-lib": "^7.0.8",
+    "@babel/core": "^7.18.9",
+    "@size-limit/preset-small-lib": "^8.0.0",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.5.9",
@@ -67,31 +52,21 @@
     "@storybook/react": "^6.5.9",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "@types/styled-components": "^5.1.25",
-    "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.19.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
     "husky": "^8.0.1",
-    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "size-limit": "^7.0.8",
+    "size-limit": "^8.0.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.9.2",
     "framer-motion": "^6.5.1",
-    "react-syntax-highlighter": "^15.5.0",
-    "storybook-addon-themes": "^6.1.0",
-    "styled-components": "^5.3.5"
-  },
-  "resolutions": {
-    "styled-components": "^5"
+    "react-router-dom": "^6.3.0"
   }
 }
