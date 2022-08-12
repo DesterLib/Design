@@ -1,7 +1,11 @@
-import React from "react";
+import React from 'react';
 
-const IconWrapper = ({ name, style }: any) => {
-  return <span style={style} className="material-symbols-rounded">{name}</span>;
+export interface IconProps {
+    icon: string;
+}
+
+const Icon = ({ icon }: IconProps) => {
+    return <i style={{ fontSize: '22px' }} className={`ti ti-${icon}`}></i>;
 };
 
-export default IconWrapper;
+export default Icon;

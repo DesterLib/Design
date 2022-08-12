@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import Logo from '../assets/logo/logo.svg';
+import Logo from '../assets/logo/logo-light-full.svg';
 
 const theme = create({
   base: 'dark',
